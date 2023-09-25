@@ -1,1 +1,41 @@
-<p>hero-page works!</p>
+<ng-template #divloading>
+  <p>Cargando</p>
+</ng-template>
+
+<div *ngIf="hero; else divloading">
+  <mat-card>
+    <mat-card-header style="margin: 0 auto">
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title class="text-3xl">{{ hero.id }}</mat-card-title>
+    </mat-card-header>
+    <div class="flex" style="margin: 0 auto">
+      <img
+        mat-card-image
+        width="250"
+        [src]="hero | heroImage"
+        alt="Photo of a Shiba Inu"
+      />
+      <mat-card-content>
+        <ol>
+          <ul>
+            {{
+              hero.alter_ego
+            }}
+          </ul>
+
+          <ul>
+            {{
+              hero.first_appearance
+            }}
+          </ul>
+          <ul>
+            {{
+              hero.publisher
+            }}
+          </ul>
+        </ol>
+      </mat-card-content>
+    </div>
+    <mat-card-actions> </mat-card-actions>
+  </mat-card>
+</div>
