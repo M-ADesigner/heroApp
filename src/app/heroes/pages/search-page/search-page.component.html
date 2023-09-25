@@ -1,1 +1,52 @@
-<p>search-page works!</p>
+<mat-form-field style="width: 100%">
+  <mat-label for="name">Buscador de heroes: </mat-label>
+  <input
+    type="text"
+    matInput
+    [formControl]="searchInput"
+    (input)="searchHero()"
+    [matAutocomplete]="auto"
+  />
+
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    autoActiveFirstOption=""
+    (optionSelected)="onselectedOption($event)"
+  >
+    <mat-option *ngFor="let hero of heroes" [value]="hero">
+      {{ hero.superhero }}
+    </mat-option>
+
+    <mat-option
+      *ngIf="
+        searchInput.value === 0 &&
+        searchInput.value &&
+        searchInput.value.length > 0
+      "
+      value=""
+    >
+      No se encontro nada con el termino {{ searchInput.value }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+<ng-template #divloading></ng-template>
+
+<div *ngIf="selectedHero; else divloading">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>{{ selectedHero.superhero }}</mat-card-title>
+      <mat-card-subtitle>{{ selectedHero.alter_ego }}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      mat-card-image
+      width="250"
+      [src]="selectedHero | heroImage"
+      [alt]="selectedHero.superhero"
+    />
+    <mat-card-content>
+      <p>{{ selectedHero.characters }}.</p>
+      <p>{{ selectedHero.first_appearance }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
