@@ -1,41 +1,36 @@
-<ng-template #divloading>
-  <p>Cargando</p>
+<ng-template #divLoading>
+  <mat-grid-list cols="1">
+    <mat-grid-tile>
+      <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+  </mat-grid-list>
 </ng-template>
 
-<div *ngIf="hero; else divloading">
-  <mat-card>
-    <mat-card-header style="margin: 0 auto">
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title class="text-3xl">{{ hero.id }}</mat-card-title>
+<div *ngIf="hero; else divLoading" class="grid p-2">
+  <mat-card class="col-12 sm:col-6">
+    <mat-card-header>
+      <mat-card-title>{{ hero.alter_ego }}</mat-card-title>
+      <mat-card-subtitle>{{ hero.superhero }}</mat-card-subtitle>
     </mat-card-header>
-    <div class="flex" style="margin: 0 auto">
-      <img
-        mat-card-image
-        width="250"
-        [src]="hero | heroImage"
-        alt="Photo of a Shiba Inu"
-      />
-      <mat-card-content>
-        <ol>
-          <ul>
-            {{
-              hero.alter_ego
-            }}
-          </ul>
 
-          <ul>
-            {{
-              hero.first_appearance
-            }}
-          </ul>
-          <ul>
-            {{
-              hero.publisher
-            }}
-          </ul>
-        </ol>
-      </mat-card-content>
-    </div>
-    <mat-card-actions> </mat-card-actions>
+    <img [src]="hero | heroImage" [alt]="hero.superhero" mat-card-image />
+  </mat-card>
+
+  <mat-card class="col-12 sm:col-6">
+    <mat-card-header>
+      <mat-card-title>Información</mat-card-title>
+      <mat-card-subtitle>{{ hero.superhero }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>{{ hero.first_appearance }}</mat-list-item>
+        <mat-list-item>{{ hero.characters }}</mat-list-item>
+        <mat-list-item>{{ hero.publisher }}</mat-list-item>
+        <mat-list-item>{{ hero.alter_ego }}</mat-list-item>
+      </mat-list>
+
+      <button mat-button color="warn" (click)="goBack()">Regresar</button>
+    </mat-card-content>
   </mat-card>
 </div>
